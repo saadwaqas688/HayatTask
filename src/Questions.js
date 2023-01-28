@@ -30,9 +30,9 @@ const Questions = ({handleChangeForCheckBox,editQuestion,deleteQuestion,question
     )
   })
 }
+<button  className="button add" onClick={()=>editQuestion(item.question,item.options,indexOfQuestion)}>edit</button>
+<button className="button add"onClick={()=>deleteQuestion(indexOfQuestion)}>delete</button>
 </div>
-<button onClick={()=>editQuestion(item.question,item.options,indexOfQuestion)}>edit</button>
-<button onClick={()=>deleteQuestion(indexOfQuestion)}>delete</button>
 </>
       )
     })
