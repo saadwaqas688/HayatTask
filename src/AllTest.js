@@ -1,33 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { collection,  addDoc, getDocs } from "firebase/firestore"; 
+import { collection,getDocs } from "firebase/firestore"; 
 import {db} from "./firebase"
 const AllTest = () => {
-     const [workSheets, setWorkSheets] = useState([])
-     const [selectedWorkSheet, setSelectedWorkSheet] = useState()
-     const [isLoading, setIsLoading] = useState()
-
-
-
-
-
-
-
+const [workSheets, setWorkSheets] = useState([])
+const [selectedWorkSheet, setSelectedWorkSheet] = useState()
+const [isLoading, setIsLoading] = useState()
 
 const handelFetch = async() => {
-  setIsLoading(true)
-
-
-
-
+setIsLoading(true)
 const querySnapshot = await getDocs(collection(db, "workSheets"));
 let list=[];
-
 querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
   list.push({id:doc.id,...doc.data()})
-
-
-  // console.log(doc.id, " => ", doc.data());
 });
 
 setWorkSheets(list)
@@ -39,7 +23,6 @@ useEffect(()=>{
   handelFetch()
 },[])
 
-console.log('workSheets',workSheets)
     return (
       <>
     {isLoading ?  <h1>Loading...</h1>
@@ -60,7 +43,7 @@ console.log('workSheets',workSheets)
 
   }
 
-): <>{selectedWorkSheet.questions.map((item,indexOfQuestion)=>{
+): <>{selectedWorkSheet.questions.map((item)=>{
         return(
         <>
         <div>
@@ -74,7 +57,6 @@ console.log('workSheets',workSheets)
         <div>{ele.text}</div>
         <input
         type="radio"
-        // name="Radio"
         id={indexofOption}
         value={ele.text}
         checked={item.selectedValue===ele.text}
